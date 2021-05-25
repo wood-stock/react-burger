@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.main {
+  margin: auto;
+  max-width: 1240px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
