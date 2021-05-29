@@ -7,7 +7,7 @@ import {
 import AddIngredient from '../add-ingredient/add-ingredient';
 import style from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ items }) => (
+const BurgerConstructor = ({ items, pushOrderButton }) => (
   <section className={style.burgerConstructor + ' pl-4'}>
     <div className={style.bun}>
       <ConstructorElement
@@ -38,7 +38,7 @@ const BurgerConstructor = ({ items }) => (
         <span className='text text_type_digits-medium'>610</span>
         <CurrencyIcon type='primary' />
       </div>
-      <Button type='primary' size='large'>
+      <Button type='primary' size='large' onClick={pushOrderButton}>
         Оформить заказ
       </Button>
     </div>

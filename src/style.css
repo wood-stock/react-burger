@@ -1,0 +1,9 @@
+.constructor-element {
+  flex-basis: 488px !important;
+}
+.constructor-element__row {
+  justify-content: space-between !important;
+}
+.constructor-element__text {
+  flex-grow: 1 !important;
+}

@@ -3,7 +3,7 @@ import style from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 
-const BurgerIngredients = ({ items }) => (
+const BurgerIngredients = ({ items, showIngredientDetails }) => (
   <section className={style.burgerIngredients}>
     <h1 className='text text_type_main-large'>Собери бургер</h1>
     <div
@@ -21,9 +21,14 @@ const BurgerIngredients = ({ items }) => (
         <h2 className='text text_type_main-medium'>Булки</h2>
         <ul className={style.cardsIngredients}>
           {items.map(
-            (item) =>
+            (item, i) =>
               item.type === 'bun' && (
-                <BurgerIngredient {...item} key={item._id} />
+                <BurgerIngredient
+                  {...item}
+                  showIngredientDetails={showIngredientDetails}
+                  ingredient={i}
+                  key={item._id}
+                />
               )
           )}
         </ul>
@@ -32,9 +37,14 @@ const BurgerIngredients = ({ items }) => (
         <h2 className='text text_type_main-medium'>Соусы</h2>
         <div className={style.cardsIngredients}>
           {items.map(
-            (item) =>
+            (item, i) =>
               item.type === 'sauce' && (
-                <BurgerIngredient {...item} key={item._id} />
+                <BurgerIngredient
+                  {...item}
+                  showIngredientDetails={showIngredientDetails}
+                  ingredient={i}
+                  key={item._id}
+                />
               )
           )}
         </div>
@@ -43,9 +53,14 @@ const BurgerIngredients = ({ items }) => (
         <h2 className='text text_type_main-medium'>Начинки</h2>
         <div className={style.cardsIngredients}>
           {items.map(
-            (item) =>
+            (item, i) =>
               item.type === 'main' && (
-                <BurgerIngredient {...item} key={item._id} />
+                <BurgerIngredient
+                  {...item}
+                  showIngredientDetails={showIngredientDetails}
+                  ingredient={i}
+                  key={item._id}
+                />
               )
           )}
         </div>
