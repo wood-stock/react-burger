@@ -4,6 +4,9 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import ModalOverlay from '../modal-overlay/modal-overlay';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-datails/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -25,23 +28,28 @@ const App = () => {
     openModal();
   };
 
+  const pushEscForClose = (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  };
+
   const url = 'https://norma.nomoreparties.space/api/ingredients';
   useEffect(() => {
     fetch(url)
       .then((response) => {
         if (response.ok) return response.json();
-        else console.log('can not connect');
+        else return Promise.reject(response.status);
       })
       .then((response) => setData(response.data))
       .catch((error) => console.log(error + ' all broke'));
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        return closeModal();
-      }
-    });
+    document.addEventListener('keydown', pushEscForClose);
+    return () => {
+      document.removeEventListener('keydown', pushEscForClose);
+    };
   });
   return (
     <>
@@ -56,8 +64,18 @@ const App = () => {
           <ModalOverlay
             closeModal={closeModal}
             orderButtonIsPush={orderButtonIsPush}
-            item={data[details]}
-          />
+          >
+            <Modal
+              closeModal={closeModal}
+              headerText={!orderButtonIsPush && 'Детали ингредиента'}
+            >
+              {orderButtonIsPush ? (
+                <OrderDetails />
+              ) : (
+                <IngredientDetails {...data[details]} />
+              )}
+            </Modal>
+          </ModalOverlay>
         )}
       </main>
     </>
