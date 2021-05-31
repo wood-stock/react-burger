@@ -69,11 +69,8 @@ const App = () => {
               closeModal={closeModal}
               headerText={!orderButtonIsPush && 'Детали ингредиента'}
             >
-              {orderButtonIsPush ? (
-                <OrderDetails />
-              ) : (
-                <IngredientDetails {...data[details]} />
-              )}
+              {orderButtonIsPush && <OrderDetails />}
+              {!orderButtonIsPush && <IngredientDetails {...data[details]} />}
             </Modal>
           </ModalOverlay>
         )}
