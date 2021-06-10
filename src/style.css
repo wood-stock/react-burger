@@ -1,9 +1,11 @@
 .constructor-element {
-  flex-basis: 488px !important;
+  flex-basis: 100%;
+  max-width: 100%;
+  margin-right: 10px;
 }
 .constructor-element__row {
-  justify-content: space-between !important;
+  justify-content: space-between;
 }
 .constructor-element__text {
-  flex-grow: 1 !important;
+  flex-grow: 1;
 }

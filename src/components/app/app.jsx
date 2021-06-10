@@ -7,17 +7,20 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-datails/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { DataContext } from '../../services/ingredientsContext';
 
 const App = () => {
   const [data, setData] = useState([]);
   const [details, setDetails] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
   const [orderButtonIsPush, setOrderButtonIsPush] = useState(false);
+  const [orderId, setOrderId] = useState();
 
   const openModal = () => setModalOpened(true);
   const closeModal = () => {
     setModalOpened(false);
     setOrderButtonIsPush(false);
+    setOrderId();
   };
   const showIngredientDetails = (i) => {
     setDetails(() => i);
@@ -31,6 +34,7 @@ const App = () => {
   const pushEscForClose = (e) => {
     if (e.key === 'Escape') {
       closeModal();
+      setOrderId();
     }
   };
 
@@ -59,21 +63,28 @@ const App = () => {
           items={data}
           showIngredientDetails={showIngredientDetails}
         />
-        <BurgerConstructor items={data} pushOrderButton={pushOrderButton} />
-        {modalOpened && (
-          <ModalOverlay
-            closeModal={closeModal}
-            orderButtonIsPush={orderButtonIsPush}
-          >
-            <Modal
+        <DataContext.Provider value={{ data, orderId, setOrderId }}>
+          {data.length && (
+            <BurgerConstructor pushOrderButton={pushOrderButton} />
+          )}
+
+          {modalOpened && (
+            <ModalOverlay
               closeModal={closeModal}
-              headerText={!orderButtonIsPush && 'Детали ингредиента'}
+              orderButtonIsPush={orderButtonIsPush}
             >
-              {orderButtonIsPush && <OrderDetails />}
-              {!orderButtonIsPush && <IngredientDetails {...data[details]} />}
-            </Modal>
-          </ModalOverlay>
-        )}
+              <Modal
+                closeModal={closeModal}
+                headerText={!orderButtonIsPush && 'Детали ингредиента'}
+              >
+                {orderButtonIsPush && orderId && (
+                  <OrderDetails orderId={orderId} />
+                )}
+                {!orderButtonIsPush && <IngredientDetails {...data[details]} />}
+              </Modal>
+            </ModalOverlay>
+          )}
+        </DataContext.Provider>
       </main>
     </>
   );
