@@ -1,4 +1,8 @@
 .modal {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
   width: 720px;
   background: #1c1c21;
   border: 1px solid rgba(76, 76, 255, 0.2);
@@ -8,6 +12,7 @@
     0px 0px 1px rgba(0, 0, 0, 0.04);
   border-radius: 40px;
   padding: 40px;
+  z-index: 2;
 }
 .header {
   display: flex;

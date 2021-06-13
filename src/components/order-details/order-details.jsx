@@ -1,7 +1,9 @@
+import { useContext } from 'react';
+import { OrderIdContext } from '../../services/appContext';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './order-details.module.css';
-import PropTypes from 'prop-types';
-const OrderDetails = ({ orderId }) => {
+const OrderDetails = () => {
+  const { orderId } = useContext(OrderIdContext);
   return (
     <section className={style.order}>
       <span className='text text_type_digits-large mb-8'>{orderId}</span>
@@ -21,7 +23,5 @@ const OrderDetails = ({ orderId }) => {
     </section>
   );
 };
-OrderDetails.propTypes = {
-  orderId: PropTypes.number.isRequired,
-};
+
 export default OrderDetails;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import style from './burger-ingredient.module.css';
 import {
   Counter,
@@ -27,5 +28,11 @@ const BurgerIngredient = ({
     </li>
   );
 };
-
+BurgerIngredient.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  ingredient: PropTypes.number.isRequired,
+  showIngredientDetails: PropTypes.func.isRequired,
+};
 export default BurgerIngredient;

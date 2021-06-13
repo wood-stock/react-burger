@@ -3,27 +3,30 @@ import style from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import ModalOverlay from '../modal-overlay/modal-overlay';
 import Modal from '../modal/modal';
-import OrderDetails from '../order-datails/order-details';
+import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { DataContext } from '../../services/ingredientsContext';
+import {
+  BurgerIngredientsContext,
+  OrderIdContext,
+  ModalContext,
+} from '../../services/appContext';
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [details, setDetails] = useState(null);
+  const [burgerIngredients, setBurgerIngredients] = useState([]);
+  const [ingredient, setIngredient] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
   const [orderButtonIsPush, setOrderButtonIsPush] = useState(false);
-  const [orderId, setOrderId] = useState();
-
+  const [orderId, setOrderId] = useState(null);
   const openModal = () => setModalOpened(true);
   const closeModal = () => {
     setModalOpened(false);
     setOrderButtonIsPush(false);
-    setOrderId();
+    setOrderId(null);
+    setIngredient();
   };
   const showIngredientDetails = (i) => {
-    setDetails(() => i);
+    setIngredient(() => i);
     openModal();
   };
   const pushOrderButton = () => {
@@ -35,6 +38,7 @@ const App = () => {
     if (e.key === 'Escape') {
       closeModal();
       setOrderId();
+      setIngredient();
     }
   };
 
@@ -45,7 +49,7 @@ const App = () => {
         if (response.ok) return response.json();
         else return Promise.reject(response.status);
       })
-      .then((response) => setData(response.data))
+      .then((response) => setBurgerIngredients(response.data))
       .catch((error) => console.log(error + ' all broke'));
   }, []);
 
@@ -59,32 +63,28 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.main}>
-        <BurgerIngredients
-          items={data}
-          showIngredientDetails={showIngredientDetails}
-        />
-        <DataContext.Provider value={{ data, orderId, setOrderId }}>
-          {data.length && (
-            <BurgerConstructor pushOrderButton={pushOrderButton} />
-          )}
-
-          {modalOpened && (
-            <ModalOverlay
-              closeModal={closeModal}
-              orderButtonIsPush={orderButtonIsPush}
-            >
-              <Modal
-                closeModal={closeModal}
-                headerText={!orderButtonIsPush && 'Детали ингредиента'}
-              >
-                {orderButtonIsPush && orderId && (
-                  <OrderDetails orderId={orderId} />
-                )}
-                {!orderButtonIsPush && <IngredientDetails {...data[details]} />}
-              </Modal>
-            </ModalOverlay>
-          )}
-        </DataContext.Provider>
+        <BurgerIngredientsContext.Provider
+          value={{
+            burgerIngredients,
+            ingredient,
+            showIngredientDetails,
+          }}
+        >
+          <BurgerIngredients />
+          <OrderIdContext.Provider
+            value={{ orderId, setOrderId, pushOrderButton }}
+          >
+            {burgerIngredients.length && <BurgerConstructor />}
+            <ModalContext.Provider value={{ closeModal }}>
+              {modalOpened && (
+                <Modal headerText={!orderButtonIsPush && 'Детали ингредиента'}>
+                  {orderId && <OrderDetails />}
+                  {!orderButtonIsPush && <IngredientDetails />}
+                </Modal>
+              )}
+            </ModalContext.Provider>
+          </OrderIdContext.Provider>
+        </BurgerIngredientsContext.Provider>
       </main>
     </>
   );

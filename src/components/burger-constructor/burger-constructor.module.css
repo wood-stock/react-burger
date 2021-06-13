@@ -40,3 +40,14 @@
   width: 36px;
   height: 36px;
 }
+:global(.constructor-element) {
+  flex-basis: 100%;
+  max-width: 100%;
+  margin-right: 10px;
+}
+:global(.constructor-element__row) {
+  justify-content: space-between;
+}
+:global(.constructor-element__text) {
+  flex-grow: 1;
+}

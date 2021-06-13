@@ -1,6 +1,8 @@
 import { useContext } from 'react';
-import { DataContext } from '../../services/ingredientsContext';
-import PropTypes from 'prop-types';
+import {
+  BurgerIngredientsContext,
+  OrderIdContext,
+} from '../../services/appContext';
 import {
   ConstructorElement,
   Button,
@@ -9,16 +11,17 @@ import {
 import AddIngredient from '../add-ingredient/add-ingredient';
 import style from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ pushOrderButton }) => {
-  const { data, setOrderId } = useContext(DataContext);
-  const buns = data.filter((item) => item.type === 'bun')[1];
-  const ingredients = data.filter((item) => item.type !== 'bun');
+const BurgerConstructor = () => {
+  const { burgerIngredients } = useContext(BurgerIngredientsContext);
+  const { setOrderId, pushOrderButton } = useContext(OrderIdContext);
+  const bun = burgerIngredients.filter((item) => item.type === 'bun')[1];
+  const ingredients = burgerIngredients.filter((item) => item.type !== 'bun');
   const ingredientsId = ingredients.map((item) => item._id);
-  const coast = ingredients.reduce(
+  const cost = ingredients.reduce(
     (result, item) => result + item.price,
-    buns.price * 2
+    bun.price * 2
   );
-  const getOrderId = () => {
+  const sendOrderTakeId = () => {
     const url = 'https://norma.nomoreparties.space/api/orders';
     fetch(url, {
       method: 'POST',
@@ -26,10 +29,13 @@ const BurgerConstructor = ({ pushOrderButton }) => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        ingredients: [...ingredientsId, buns._id],
+        ingredients: [...ingredientsId, bun._id],
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) return response.json();
+        else return Promise.reject(response.status);
+      })
       .then((result) => setOrderId(result.order.number))
       .catch((error) => console.log('error', error));
   };
@@ -40,9 +46,9 @@ const BurgerConstructor = ({ pushOrderButton }) => {
         <ConstructorElement
           type='top'
           isLocked={true}
-          text={`${buns.name} (верх)`}
-          price={buns.price}
-          thumbnail={buns.image}
+          text={`${bun.name} (верх)`}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
       <ul className={style.dopElement}>
@@ -54,14 +60,14 @@ const BurgerConstructor = ({ pushOrderButton }) => {
         <ConstructorElement
           type='bottom'
           isLocked={true}
-          text={`${buns.name} (низ)`}
-          price={buns.price}
-          thumbnail={buns.image}
+          text={`${bun.name} (низ)`}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
       <div className={style.finalPrice}>
         <div className={style.price}>
-          <span className='text text_type_digits-medium'>{coast}</span>
+          <span className='text text_type_digits-medium'>{cost}</span>
           <CurrencyIcon type='primary' />
         </div>
         <Button
@@ -69,7 +75,7 @@ const BurgerConstructor = ({ pushOrderButton }) => {
           size='large'
           onClick={() => {
             pushOrderButton();
-            getOrderId();
+            sendOrderTakeId();
           }}
         >
           Оформить заказ
@@ -77,18 +83,6 @@ const BurgerConstructor = ({ pushOrderButton }) => {
       </div>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default BurgerConstructor;
