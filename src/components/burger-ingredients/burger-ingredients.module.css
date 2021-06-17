@@ -5,9 +5,16 @@
 .allIngredients {
   padding-top: 20px;
 }
+.tabs {
+  display: flex;
+  justify-content: space-between;
+}
+.tab {
+  flex-grow: 1;
+}
 .wrapperAllIngredients {
   overflow-y: auto;
-  max-height: 55vh;
+  max-height: 65vh;
 }
 .wrapperAllIngredients::-webkit-scrollbar {
   width: 8px;

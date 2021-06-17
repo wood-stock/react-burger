@@ -10,7 +10,7 @@
   margin-left: 24px;
 }
 .dopElement {
-  max-height: 30vh;
+  height: calc(100vh - 520px);
   display: flex;
   flex-direction: column;
   gap: 10px;

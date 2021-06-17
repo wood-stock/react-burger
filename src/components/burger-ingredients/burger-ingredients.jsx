@@ -11,15 +11,18 @@ const BurgerIngredients = () => {
   return (
     <section className={style.burgerIngredients}>
       <h1 className='text text_type_main-large'>Собери бургер</h1>
-      <div
-        style={{ display: 'flex', justifyContent: 'space-around' }}
-        className='mt-5 mb-5'
-      >
-        <Tab value='one' active={true}>
-          Булки
-        </Tab>
-        <Tab value='two'>Соусы</Tab>
-        <Tab value='three'>Начинки</Tab>
+      <div className={`${style.tabs} mt-5 mb-5`}>
+        <div className={style.tab}>
+          <Tab value='one' active={true}>
+            Булки
+          </Tab>
+        </div>
+        <div className={style.tab}>
+          <Tab value='two'>Соусы</Tab>
+        </div>
+        <div className={style.tab}>
+          <Tab value='three'>Начинки</Tab>
+        </div>
       </div>
       <div className={style.wrapperAllIngredients}>
         <div className={style.allIngredients}>
