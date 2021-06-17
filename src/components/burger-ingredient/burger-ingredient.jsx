@@ -32,7 +32,7 @@ BurgerIngredient.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  ingredient: PropTypes.number.isRequired,
+  ingredient: PropTypes.object.isRequired,
   showIngredientDetails: PropTypes.func.isRequired,
 };
 export default BurgerIngredient;
