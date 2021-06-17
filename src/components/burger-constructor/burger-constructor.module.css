@@ -10,7 +10,7 @@
   margin-left: 24px;
 }
 .dopElement {
-  max-height: 30vh;
+  height: calc(100vh - 520px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -39,4 +39,15 @@
 .price svg {
   width: 36px;
   height: 36px;
+}
+:global(.constructor-element) {
+  flex-basis: 100%;
+  max-width: 100%;
+  margin-right: 10px;
+}
+:global(.constructor-element__row) {
+  justify-content: space-between;
+}
+:global(.constructor-element__text) {
+  flex-grow: 1;
 }
