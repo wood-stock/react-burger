@@ -3,11 +3,9 @@ import { BurgerIngredientsContext } from '../../services/appContext';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-details.module.css';
 const IngredientDetails = () => {
-  const { burgerIngredients, ingredient } = useContext(
-    BurgerIngredientsContext
-  );
+  const { selectedIngredient } = useContext(BurgerIngredientsContext);
   const { name, image_large, calories, proteins, fat, carbohydrates } =
-    burgerIngredients[ingredient];
+    selectedIngredient;
 
   return (
     <section className={style.ingredient}>

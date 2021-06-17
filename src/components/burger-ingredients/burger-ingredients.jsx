@@ -34,7 +34,7 @@ const BurgerIngredients = () => {
                   <BurgerIngredient
                     {...item}
                     showIngredientDetails={showIngredientDetails}
-                    ingredient={i}
+                    ingredient={item}
                     key={item._id}
                   />
                 )
@@ -50,7 +50,7 @@ const BurgerIngredients = () => {
                   <BurgerIngredient
                     {...item}
                     showIngredientDetails={showIngredientDetails}
-                    ingredient={i}
+                    ingredient={item}
                     key={item._id}
                   />
                 )
@@ -66,7 +66,7 @@ const BurgerIngredients = () => {
                   <BurgerIngredient
                     {...item}
                     showIngredientDetails={showIngredientDetails}
-                    ingredient={i}
+                    ingredient={item}
                     key={item._id}
                   />
                 )

@@ -8,20 +8,20 @@ import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import AddIngredient from '../add-ingredient/add-ingredient';
+import AddIngredient from '../constructor-ingredient/add-ingredient';
 import style from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
   const { burgerIngredients } = useContext(BurgerIngredientsContext);
-  const { setOrderId, pushOrderButton } = useContext(OrderIdContext);
+  const { setOrderId } = useContext(OrderIdContext);
   const bun = burgerIngredients.filter((item) => item.type === 'bun')[1];
   const ingredients = burgerIngredients.filter((item) => item.type !== 'bun');
-  const ingredientsId = ingredients.map((item) => item._id);
   const cost = ingredients.reduce(
     (result, item) => result + item.price,
     bun.price * 2
   );
-  const sendOrderTakeId = () => {
+  const handleAddOrder = () => {
+    const ingredientsId = ingredients.map((item) => item._id);
     const url = 'https://norma.nomoreparties.space/api/orders';
     fetch(url, {
       method: 'POST',
@@ -74,8 +74,7 @@ const BurgerConstructor = () => {
           type='primary'
           size='large'
           onClick={() => {
-            pushOrderButton();
-            sendOrderTakeId();
+            handleAddOrder();
           }}
         >
           Оформить заказ
