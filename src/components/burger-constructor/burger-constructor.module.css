@@ -10,11 +10,13 @@
   margin-left: 24px;
 }
 .dopElement {
-  height: calc(100vh - 520px);
+  max-height: calc(100vh - 520px);
   display: flex;
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
+  min-height: 75px;
+  border: 1px solid #8585ad;
 }
 .dopElement::-webkit-scrollbar {
   width: 8px;

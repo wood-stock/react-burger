@@ -1,12 +1,11 @@
-import { useContext } from 'react';
-import { OrderIdContext } from '../../services/appContext';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './order-details.module.css';
+import { useSelector } from 'react-redux';
 const OrderDetails = () => {
-  const { orderId } = useContext(OrderIdContext);
+  const { order } = useSelector((state) => state.ingredients);
   return (
     <section className={style.order}>
-      <span className='text text_type_digits-large mb-8'>{orderId}</span>
+      <span className='text text_type_digits-large mb-8'>{order}</span>
       <span className='text text_type_main-medium mb-15'>
         идентификатор заказа
       </span>

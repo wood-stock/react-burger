@@ -2,6 +2,7 @@
   padding: 0 16px;
   position: relative;
   flex-basis: 272px;
+  cursor: grab;
 }
 .price {
   margin: 4px auto;

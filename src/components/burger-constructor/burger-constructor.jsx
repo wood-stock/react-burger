@@ -1,8 +1,5 @@
-import { useContext } from 'react';
-import {
-  BurgerIngredientsContext,
-  OrderIdContext,
-} from '../../services/appContext';
+//КОПИЯ для DND
+import { useEffect } from 'react';
 import {
   ConstructorElement,
   Button,
@@ -10,72 +7,90 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import AddIngredient from '../constructor-ingredient/add-ingredient';
 import style from './burger-constructor.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  ADD_INGREDIENT,
+  RECALCULATE_TOTAL_PRICE,
+  handleAddOrder,
+} from '../../services/actions/ingredients';
+import { useDrop } from 'react-dnd';
 
 const BurgerConstructor = () => {
-  const { burgerIngredients } = useContext(BurgerIngredientsContext);
-  const { setOrderId } = useContext(OrderIdContext);
-  const bun = burgerIngredients.filter((item) => item.type === 'bun')[1];
-  const ingredients = burgerIngredients.filter((item) => item.type !== 'bun');
-  const cost = ingredients.reduce(
-    (result, item) => result + item.price,
-    bun.price * 2
-  );
-  const handleAddOrder = () => {
-    const ingredientsId = ingredients.map((item) => item._id);
-    const url = 'https://norma.nomoreparties.space/api/orders';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({
-        ingredients: [...ingredientsId, bun._id],
-      }),
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        else return Promise.reject(response.status);
-      })
-      .then((result) => setOrderId(result.order.number))
-      .catch((error) => console.log('error', error));
-  };
+  const dispatch = useDispatch();
 
+  const { constructorIngredients, totalPrice, constructorBun } = useSelector(
+    (state) => state.ingredients
+  );
+  const [, dropTarget] = useDrop({
+    accept: 'Ingredient',
+    drop(ingredient) {
+      dispatch({
+        type: ADD_INGREDIENT,
+        ingredient,
+        unidi: Math.round(Math.random() * 1000),
+      });
+    },
+  });
+  useEffect(() => {
+    dispatch({
+      type: RECALCULATE_TOTAL_PRICE,
+    });
+  }, [constructorBun, constructorIngredients, dispatch]);
+  const idForOrder = [
+    ...constructorIngredients.map((item) => item._id),
+    constructorBun._id,
+  ];
   return (
-    <section className={style.burgerConstructor + ' pl-4'}>
+    <section className={style.burgerConstructor + ' pl-4'} ref={dropTarget}>
       <div className={style.bun}>
         <ConstructorElement
           type='top'
           isLocked={true}
-          text={`${bun.name} (верх)`}
-          price={bun.price}
-          thumbnail={bun.image}
+          text={`${constructorBun.name} (верх)`}
+          price={constructorBun.price}
+          thumbnail={constructorBun.image}
         />
       </div>
-      <ul className={style.dopElement}>
-        {ingredients.map((item) => (
-          <AddIngredient {...item} key={item._id} />
-        ))}
-      </ul>
+
+      {constructorIngredients.length ? (
+        <ul className={style.dopElement}>
+          {constructorIngredients.map((item, index) => (
+            <AddIngredient
+              {...item}
+              idx={index}
+              key={Math.round(Math.random() * 1000)}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div
+          className='text text_type_main-default text_color_inactive'
+          style={{ paddingLeft: '70px' }}
+        >
+          <p>Давай собери уже свой бургер!</p>
+          <p>Перетаскивай сюда всё что хочешь!</p>
+          <p>Булку мы выбрали за тебя, можешь поменять.</p>
+          <p>Бургер без булки, как окрошка без кваса - салат.</p>
+        </div>
+      )}
       <div className={style.bun}>
         <ConstructorElement
           type='bottom'
           isLocked={true}
-          text={`${bun.name} (низ)`}
-          price={bun.price}
-          thumbnail={bun.image}
+          text={`${constructorBun.name} (низ)`}
+          price={constructorBun.price}
+          thumbnail={constructorBun.image}
         />
       </div>
       <div className={style.finalPrice}>
         <div className={style.price}>
-          <span className='text text_type_digits-medium'>{cost}</span>
+          <span className='text text_type_digits-medium'>{totalPrice}</span>
           <CurrencyIcon type='primary' />
         </div>
         <Button
           type='primary'
           size='large'
-          onClick={() => {
-            handleAddOrder();
-          }}
+          onClick={() => dispatch(handleAddOrder(idForOrder))}
         >
           Оформить заказ
         </Button>

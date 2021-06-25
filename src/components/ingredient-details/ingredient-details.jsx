@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { BurgerIngredientsContext } from '../../services/appContext';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-details.module.css';
+import { useSelector } from 'react-redux';
 const IngredientDetails = () => {
-  const { selectedIngredient } = useContext(BurgerIngredientsContext);
+  const { selectedIngredient } = useSelector((state) => state.ingredients);
   const { name, image_large, calories, proteins, fat, carbohydrates } =
     selectedIngredient;
 
