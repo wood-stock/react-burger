@@ -19,7 +19,13 @@ export const DEL_ADD_INGREDIENT = 'DEL_ADD_INGREDIENT';
 
 export const RECALCULATE_TOTAL_PRICE = 'RECALCULATE_TOTAL_PRICE';
 
-export const MOVE_CONSTRUCTOR_ITEM = 'MOVE_CONSTRUCTOR_ITE';
+export const MOVE_CONSTRUCTOR_ITEM = 'MOVE_CONSTRUCTOR_ITEM';
+
+export const moveConstructorItem = ({ dragIndex, hoverIndex }) => ({
+  type: MOVE_CONSTRUCTOR_ITEM,
+  dragIndex,
+  hoverIndex,
+});
 
 export const getIngredients = () => (dispatch) => {
   dispatch({

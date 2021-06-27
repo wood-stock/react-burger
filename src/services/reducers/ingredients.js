@@ -108,7 +108,7 @@ export const ingredientsReducer = (state = initialState, action) => {
           ...state,
           constructorIngredients: [
             ...state.constructorIngredients,
-            { ...action.ingredient.ingredient, unic: action.unidi },
+            { ...action.ingredient.ingredient },
           ],
         };
       } else {
@@ -123,7 +123,7 @@ export const ingredientsReducer = (state = initialState, action) => {
         ...state,
         constructorIngredients: [
           ...state.constructorIngredients.filter(
-            (item) => action.id !== item.unic
+            (item, index) => action.index !== index
           ),
         ],
       };
@@ -137,16 +137,22 @@ export const ingredientsReducer = (state = initialState, action) => {
         ),
       };
     }
-    case MOVE_CONSTRUCTOR_ITEM:
-      // const newList = state.constructorIngredients.slice();
-      // const dragItem = state.constructorIngredients.slice()[action.dragIndex];
-      // const hoverItem = state.constructorIngredients.slice()[action.hoverIndex];
-      // newList[action.hoverIndex] = dragItem;
-      // newList[action.dragIndex] = hoverItem;
+    case MOVE_CONSTRUCTOR_ITEM: {
+      const dragIndex = action.dragIndex;
+      const hoverIndex = action.hoverIndex;
+      const arr = [...state.constructorIngredients];
+
+      const dragElement = arr[dragIndex];
+      const hoverElement = arr[hoverIndex];
+
+      arr[hoverIndex] = dragElement;
+      arr[dragIndex] = hoverElement;
+
       return {
         ...state,
-        test: 'пАмАгите',
+        constructorIngredients: [...arr],
       };
+    }
 
     default: {
       return state;

@@ -1,4 +1,3 @@
-//КОПИЯ для DND
 import { useEffect } from 'react';
 import {
   ConstructorElement,
@@ -27,7 +26,6 @@ const BurgerConstructor = () => {
       dispatch({
         type: ADD_INGREDIENT,
         ingredient,
-        unidi: Math.round(Math.random() * 1000),
       });
     },
   });
@@ -56,8 +54,8 @@ const BurgerConstructor = () => {
         <ul className={style.dopElement}>
           {constructorIngredients.map((item, index) => (
             <AddIngredient
-              {...item}
-              idx={index}
+              item={item}
+              index={index}
               key={Math.round(Math.random() * 1000)}
             />
           ))}
