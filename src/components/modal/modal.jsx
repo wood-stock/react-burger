@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './modal.module.css';
-import { CLOSE_MODAL } from '../../services/actions/ingredients';
+import { CLOSE_MODAL } from '../../services/actions/modal';
 import { useDispatch } from 'react-redux';
 const Modal = ({ children, headerText }) => {
   const dispatch = useDispatch();

@@ -7,10 +7,10 @@ const BurgerIngredients = () => {
   const { ingredients } = useSelector((state) => state.ingredients);
   const [tab, setTab] = useState('bun');
 
-  const wrapperRef = useRef(null);
-  const bunRef = useRef(null);
-  const sauceRef = useRef(null);
-  const mainRef = useRef(null);
+  const wrapperRef = useRef(null),
+    bunRef = useRef(null),
+    sauceRef = useRef(null),
+    mainRef = useRef(null);
 
   const hadnleTab = (value, ref) => () => {
     setTab(value);
@@ -66,11 +66,7 @@ const BurgerIngredients = () => {
             {ingredients.map(
               (item) =>
                 item.type === 'bun' && (
-                  <BurgerIngredient
-                    {...item}
-                    ingredient={item}
-                    key={item._id}
-                  />
+                  <BurgerIngredient ingredient={item} key={item._id} />
                 )
             )}
           </ul>
@@ -81,11 +77,7 @@ const BurgerIngredients = () => {
             {ingredients.map(
               (item) =>
                 item.type === 'sauce' && (
-                  <BurgerIngredient
-                    {...item}
-                    ingredient={item}
-                    key={item._id}
-                  />
+                  <BurgerIngredient ingredient={item} key={item._id} />
                 )
             )}
           </div>
@@ -96,11 +88,7 @@ const BurgerIngredients = () => {
             {ingredients.map(
               (item) =>
                 item.type === 'main' && (
-                  <BurgerIngredient
-                    {...item}
-                    ingredient={item}
-                    key={item._id}
-                  />
+                  <BurgerIngredient ingredient={item} key={item._id} />
                 )
             )}
           </div>

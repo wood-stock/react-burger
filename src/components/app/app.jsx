@@ -12,9 +12,19 @@ import Loader from '../loader/loader';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 const App = () => {
-  const { ingredientsSuccess, selectedIngredient, order } = useSelector(
-    (state) => state.ingredients
-  );
+  const {
+    ingredientsSuccess,
+    selectedIngredient,
+    orderSuccess,
+    ingredientsRequest,
+    ingredientsError,
+  } = useSelector((state) => ({
+    ingredientsSuccess: state.ingredients.ingredientsSuccess,
+    ingredientsRequest: state.ingredients.ingredientsRequest,
+    ingredientsError: state.ingredients.ingredientsError,
+    selectedIngredient: state.selectedIngredient.selectedIngredient,
+    orderSuccess: state.order.orderSuccess,
+  }));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
@@ -23,7 +33,8 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.main}>
-        {ingredientsSuccess ? (
+        {ingredientsRequest && <Loader />}
+        {ingredientsSuccess && (
           <>
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
@@ -34,14 +45,17 @@ const App = () => {
                 <IngredientDetails />
               </Modal>
             )}
-            {order && (
+            {orderSuccess && (
               <Modal>
                 <OrderDetails />
               </Modal>
             )}
           </>
-        ) : (
-          <Loader />
+        )}
+        {ingredientsError && (
+          <p className='text text_type_main-medium text_color_inactive'>
+            Всё сломалось, на нас напали Тираниды
+          </p>
         )}
       </main>
     </>

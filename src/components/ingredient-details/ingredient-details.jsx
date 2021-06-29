@@ -2,7 +2,9 @@ import '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
 const IngredientDetails = () => {
-  const { selectedIngredient } = useSelector((state) => state.ingredients);
+  const { selectedIngredient } = useSelector(
+    (state) => state.selectedIngredient
+  );
   const { name, image_large, calories, proteins, fat, carbohydrates } =
     selectedIngredient;
 

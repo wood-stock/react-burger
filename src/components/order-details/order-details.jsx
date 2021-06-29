@@ -2,7 +2,7 @@ import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-component
 import style from './order-details.module.css';
 import { useSelector } from 'react-redux';
 const OrderDetails = () => {
-  const { order } = useSelector((state) => state.ingredients);
+  const { order } = useSelector((state) => state.order);
   return (
     <section className={style.order}>
       <span className='text text_type_digits-large mb-8'>{order}</span>

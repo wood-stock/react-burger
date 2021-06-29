@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   ConstructorElement,
   DragIcon,
@@ -8,11 +8,11 @@ import style from './add-ingredient.module.css';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import {
-  DEL_ADD_INGREDIENT,
+  DEL_CONSTRUCTOR_INGREDIENT,
   moveConstructorItem,
-} from '../../services/actions/ingredients';
+} from '../../services/actions/constructor';
 
-const AddIngredient = (props) => {
+const AddIngredient = ({ name, price, image, id, index }) => {
   const dispatch = useDispatch();
   const ref = useRef(null);
   const [{ handlerId }, dropRef] = useDrop({
@@ -27,7 +27,7 @@ const AddIngredient = (props) => {
         return;
       }
       const dragIndex = item.index;
-      const hoverIndex = props.index;
+      const hoverIndex = index;
       if (dragIndex === hoverIndex) {
         return;
       }
@@ -54,7 +54,7 @@ const AddIngredient = (props) => {
 
   const [{ isDragging }, dragRef] = useDrag({
     type: 'swap-ingredient',
-    item: { id: props.item._id, index: props.index },
+    item: { id: id, index: index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -65,8 +65,8 @@ const AddIngredient = (props) => {
 
   const removeAddIngredient = () =>
     dispatch({
-      type: DEL_ADD_INGREDIENT,
-      index: props.index,
+      type: DEL_CONSTRUCTOR_INGREDIENT,
+      index: index,
     });
   return (
     <li
@@ -77,17 +77,19 @@ const AddIngredient = (props) => {
     >
       <DragIcon type='primary' />
       <ConstructorElement
-        text={props.item.name}
-        price={props.item.price}
-        thumbnail={props.item.image}
+        text={name}
+        price={price}
+        thumbnail={image}
         handleClose={() => removeAddIngredient()}
       />
     </li>
   );
 };
-// AddIngredient.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   price: PropTypes.number.isRequired,
-//   image: PropTypes.string.isRequired,
-// };
+AddIngredient.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
 export default AddIngredient;
