@@ -1,16 +1,14 @@
 .cardIngredient {
-  padding: 0 16px;
+  text-align: center;
   position: relative;
-  flex-basis: 272px;
+  flex-basis: 50%;
+  cursor: grab;
 }
 .price {
   margin: 4px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.name {
-  text-align: center;
 }
 .CurrencyIcon {
   flex-basis: 24px;
