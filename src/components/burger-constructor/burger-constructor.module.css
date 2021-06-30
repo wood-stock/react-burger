@@ -16,7 +16,6 @@
   gap: 10px;
   overflow-y: auto;
   min-height: 75px;
-  border: 1px solid #8585ad;
 }
 .dopElement::-webkit-scrollbar {
   width: 8px;

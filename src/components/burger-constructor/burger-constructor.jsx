@@ -23,6 +23,7 @@ const BurgerConstructor = () => {
       dispatch({
         type: ADD_CONSTRUCTOR_INGREDIENT,
         ...ingredient,
+        randomId: Math.round(Math.random() * 1000),
       });
     },
   });

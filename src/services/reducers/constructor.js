@@ -36,7 +36,7 @@ export const constructorReducer = (state = initialState, action) => {
             ...state.constructorIngredients,
             {
               ...action.ingredient,
-              key: Math.round(Math.random() * 1000),
+              key: action.randomId,
             },
           ],
         };
@@ -46,7 +46,7 @@ export const constructorReducer = (state = initialState, action) => {
           constructorIngredients: [
             {
               ...action.ingredient,
-              key: Math.round(Math.random() * 1000),
+              key: action.randomId,
             },
           ],
         };
