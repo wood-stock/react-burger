@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   ConstructorElement,
   Button,
@@ -12,8 +13,9 @@ import { handleAddOrder } from '../../services/actions/order';
 import { useDrop } from 'react-dnd';
 
 const BurgerConstructor = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-
+  const hasToken = localStorage.getItem('refreshToken');
   const { constructorIngredients, constructorBun } = useSelector(
     (state) => state.constructor
   );
@@ -61,7 +63,7 @@ const BurgerConstructor = () => {
                 isLocked={true}
                 text={`${constructorBun.name} (верх)`}
                 price={constructorBun.price}
-                thumbnail={constructorBun.image}
+                thumbnail={constructorBun?.image}
               />
             </div>
           )}
@@ -105,7 +107,11 @@ const BurgerConstructor = () => {
                 <Button
                   type='primary'
                   size='large'
-                  onClick={() => dispatch(handleAddOrder(idForOrder()))}
+                  onClick={
+                    hasToken
+                      ? () => dispatch(handleAddOrder(idForOrder()))
+                      : () => history.replace('/login')
+                  }
                 >
                   Оформить заказ
                 </Button>

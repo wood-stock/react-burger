@@ -1,0 +1,26 @@
+.content {
+  display: flex;
+  gap: 60px;
+  justify-content: space-between;
+}
+.feed {
+  width: 590px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 70vh;
+  overflow: auto;
+}
+.active {
+  color: var(--text-primary-color);
+}
+
+.feed::-webkit-scrollbar {
+  width: 8px;
+}
+.feed::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.feed::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}

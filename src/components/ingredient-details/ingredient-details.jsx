@@ -1,15 +1,18 @@
 import '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
-const IngredientDetails = () => {
-  const { selectedIngredient } = useSelector(
-    (state) => state.selectedIngredient
-  );
+import { useParams } from 'react-router-dom';
+
+const IngredientDetails = ({ headerText }) => {
+  const { id } = useParams();
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const selectedIngredient = ingredients.find((item) => item._id === id);
   const { name, image_large, calories, proteins, fat, carbohydrates } =
     selectedIngredient;
 
   return (
     <section className={style.ingredient}>
+      <h2 className='text text_type_main-large mt-30'>{headerText}</h2>
       <img src={image_large} alt={name} className='mb-4' />
       <h2 className='text text_type_main-medium mb-8'>{name}</h2>
       <div className={style.info + ' text_color_inactive mb-15'}>

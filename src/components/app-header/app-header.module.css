@@ -38,9 +38,6 @@
   color: inherit;
   text-decoration: inherit;
 }
-.button:hover {
-  color: #f2f2f3;
-}
 
 .li {
   display: flex;
@@ -48,4 +45,10 @@
 }
 .ul {
   display: flex;
+}
+.active {
+  color: var(--text-primary-color);
+}
+.active svg {
+  fill: var(--text-primary-color);
 }

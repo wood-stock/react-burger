@@ -1,64 +1,112 @@
 import { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import style from './app.module.css';
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import {
+  ProtectedRouteAuth,
+  ProtectedRouteUnAuth,
+} from '../protected-route/protected-route';
+import Modal from '../modal/modal';
+import {
+  Main,
+  Login,
+  Register,
+  Forgot,
+  Reset,
+  Profile,
+  History,
+  Feed,
+  SingleOrder,
+} from '../../pages';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import Loader from '../loader/loader';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { refresh } from '../../services/actions/auth';
 const App = () => {
-  const {
-    ingredientsSuccess,
-    selectedIngredient,
-    orderSuccess,
-    ingredientsRequest,
-    ingredientsError,
-  } = useSelector((state) => ({
-    ingredientsSuccess: state.ingredients.ingredientsSuccess,
-    ingredientsRequest: state.ingredients.ingredientsRequest,
-    ingredientsError: state.ingredients.ingredientsError,
-    selectedIngredient: state.selectedIngredient.selectedIngredient,
-    orderSuccess: state.order.orderSuccess,
-  }));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
+    dispatch(refresh());
   }, [dispatch]);
+  const { ingredientsSuccess } = useSelector((store) => store.ingredients);
+  const ModalSwitch = () => {
+    const location = useLocation();
+    const history = useHistory();
+    let background =
+      history.action === 'PUSH' && location.state && location.state.background;
+    return (
+      <>
+        <AppHeader />
+        <main className={style.main}>
+          <Switch location={background || location}>
+            <Route path='/' exact>
+              <Main />
+            </Route>
+            <ProtectedRouteUnAuth path='/login' exact>
+              <Login />
+            </ProtectedRouteUnAuth>
+            <ProtectedRouteUnAuth path='/register' exact>
+              <Register />
+            </ProtectedRouteUnAuth>
+            <ProtectedRouteUnAuth path='/forgot-password' exact>
+              <Forgot />
+            </ProtectedRouteUnAuth>
+            <ProtectedRouteUnAuth path='/reset-password' exact>
+              <Reset />
+            </ProtectedRouteUnAuth>
+            <Route path='/feed' exact>
+              <Feed />
+            </Route>
+            <Route path='/feed/single' exact>
+              <SingleOrder />
+            </Route>
+            <ProtectedRouteAuth path='/profile' exact>
+              <Profile />
+            </ProtectedRouteAuth>
+            <ProtectedRouteAuth path='/profile/orders' exact>
+              <History />
+            </ProtectedRouteAuth>
+            <ProtectedRouteAuth path='/profile/orders/single' exact>
+              <SingleOrder />
+            </ProtectedRouteAuth>
+            <Route path='/ingredients/:id' exact>
+              <IngredientDetails headerText='Детали ингредиента' />
+            </Route>
+            <Route>
+              <p className='text text_type_digits-large'>
+                404
+                <span className='text text_type_main-large'>
+                  Я страница и меня нет
+                </span>
+              </p>
+            </Route>
+          </Switch>
+          {background && (
+            <Route
+              path='/ingredients/:id'
+              children={
+                <Modal headerText='Детали ингредиента'>
+                  <IngredientDetails />
+                </Modal>
+              }
+            ></Route>
+          )}
+        </main>
+      </>
+    );
+  };
+  if (!ingredientsSuccess) return <Loader />;
   return (
-    <>
-      <AppHeader />
-      <main className={style.main}>
-        {ingredientsRequest && <Loader />}
-        {ingredientsSuccess && (
-          <>
-            <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </DndProvider>
-            {selectedIngredient && (
-              <Modal headerText='Детали ингредиента'>
-                <IngredientDetails />
-              </Modal>
-            )}
-            {orderSuccess && (
-              <Modal>
-                <OrderDetails />
-              </Modal>
-            )}
-          </>
-        )}
-        {ingredientsError && (
-          <p className='text text_type_main-medium text_color_inactive'>
-            Всё сломалось, на нас напали Тираниды
-          </p>
-        )}
-      </main>
-    </>
+    <Router>
+      <ModalSwitch />
+    </Router>
   );
 };
 
