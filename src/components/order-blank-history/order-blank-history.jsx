@@ -1,5 +1,6 @@
 import style from './order-blank-history.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import IconIngredient from '../icon-ingredient/icon-ingredient';
 export const OrderBlankHistory = () => {
   return (
     <div className={style.base}>
@@ -17,27 +18,9 @@ export const OrderBlankHistory = () => {
       <div className={`${style.info} pt-6`}>
         <div>
           <div className={style.group}>
-            <div className={style.pict} style={{ zIndex: 10 }}>
-              <img
-                className={style.img}
-                src='https://code.s3.yandex.net/react/code/bun-02-mobile.png'
-                alt=''
-              />
-            </div>
-            <div className={style.pict} style={{ left: -15, zIndex: 9 }}>
-              <img
-                className={style.img}
-                src='https://code.s3.yandex.net/react/code/meat-04-mobile.png'
-                alt=''
-              />
-            </div>
-            <div className={style.pict} style={{ left: -30, zIndex: 8 }}>
-              <img
-                className={style.img}
-                src='https://code.s3.yandex.net/react/code/sauce-02-mobile.png'
-                alt=''
-              />
-            </div>
+            <IconIngredient style={{ zIndex: 10 }} />
+            <IconIngredient style={{ left: -15, zIndex: 9 }} />
+            <IconIngredient style={{ left: -30, zIndex: 8 }} />
           </div>
         </div>
         <div className={`${style.price} text text_type_digits-default`}>

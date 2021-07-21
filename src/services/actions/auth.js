@@ -1,5 +1,5 @@
 import { setCookie, deleteCookie, getCookie } from '../utils';
-import { checkResponse } from '../api';
+import { checkResponse, url } from '../api';
 //регистрация
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -36,7 +36,7 @@ export const registration = (email, password, name) => (dispatch) => {
   dispatch({
     type: REGISTER_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/auth/register', {
+  fetch(`${url}auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export const login = (email, password) => (dispatch) => {
   dispatch({
     type: LOGIN_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/auth/login', {
+  fetch(`${url}auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ export const logout = (history) => (dispatch) => {
   dispatch({
     type: LOGOUT_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/auth/logout', {
+  fetch(`${url}auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export const refresh = () => (dispatch) => {
   dispatch({
     type: REFRESH_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/auth/token', {
+  fetch(`${url}auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -151,8 +151,6 @@ export const refresh = () => (dispatch) => {
       });
     })
     .catch(() => {
-      deleteCookie('token');
-      localStorage.removeItem('refreshToken');
       dispatch({
         type: REFRESH_ERROR,
       });
@@ -162,7 +160,7 @@ export const forgot = (email, history) => (dispatch) => {
   dispatch({
     type: FORGOT_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/password-reset', {
+  fetch(`${url}password-reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -189,7 +187,7 @@ export const reset = (password, token, history) => (dispatch) => {
   dispatch({
     type: RESET_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
+  fetch(`${url}password-reset/reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -216,7 +214,7 @@ export const user = () => (dispatch) => {
   dispatch({
     type: USER_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/auth/user', {
+  fetch(`${url}auth/user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -246,7 +244,7 @@ export const edit = (email, password, name) => (dispatch) => {
   dispatch({
     type: EDIT_REQUEST,
   });
-  fetch('https://norma.nomoreparties.space/api/auth/user', {
+  fetch(`${url}auth/user`, {
     method: 'PATCH',
     mode: 'cors',
     cache: 'no-cache',

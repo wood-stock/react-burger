@@ -12,16 +12,16 @@ const History = () => {
         </p>
       </nav>
       <div className={style.feed}>
-        <Link exacct to='/profile/orders/single'>
+        <Link exact to='/profile/orders/single'>
           <OrderBlankHistory />
         </Link>
-        <Link exacct to='/profile/orders/single'>
+        <Link exact to='/profile/orders/single'>
           <OrderBlankHistory />
         </Link>
-        <Link exacct to='/profile/orders/single'>
+        <Link exact to='/profile/orders/single'>
           <OrderBlankHistory />
         </Link>
-        <Link exacct to='/profile/orders/single'>
+        <Link exact to='/profile/orders/single'>
           <OrderBlankHistory />
         </Link>
       </div>
