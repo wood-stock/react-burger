@@ -1,3 +1,4 @@
+import { NavLink, useLocation } from 'react-router-dom';
 import style from './app-header.module.css';
 import {
   Logo,
@@ -6,44 +7,63 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const AppHeader = () => (
-  <header className={style.header + ' pt-4 pb-4'}>
-    <div className={style.container}>
-      <div className={style.wrapperNav}>
-        <nav>
-          <ul className={style.ul}>
-            <li className={style.li}>
-              <a href='/' className={style.button + ' mr-2'}>
-                <BurgerIcon type='primary' />
-                <span className='pl-2 text text_type_main-default'>
-                  Конструктор
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href='/' className={style.button}>
-                <ListIcon type='secondary' />
-                <span className='pl-2 text text_type_main-default text_color_inactive'>
-                  Лента заказов
-                </span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+const AppHeader = () => {
+  const location = useLocation().pathname;
+
+  return (
+    <header className={style.header + ' pt-4 pb-4'}>
+      <div className={style.container}>
+        <div className={style.wrapperNav}>
+          <nav>
+            <ul
+              className={`${style.ul} text text_type_main-default text_color_inactive`}
+            >
+              <li className={style.li}>
+                <NavLink
+                  exact
+                  to='/'
+                  className={`${style.button} mr-2`}
+                  activeClassName={style.active}
+                >
+                  <BurgerIcon type='secondary' />
+                  <span className='pl-2 '>Конструктор</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to='/feed'
+                  className={style.button}
+                  activeClassName={style.active}
+                >
+                  <ListIcon type='secondary' />
+                  <span className='pl-2'>Лента заказов</span>
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className={style.wrapperLogo}>
+          <Logo />
+        </div>
+        <div
+          className={`${style.wrapperLk} text text_type_main-default text_color_inactive`}
+        >
+          <NavLink
+            to='/profile'
+            className={
+              location === '/profile' || location === '/login'
+                ? `${style.button} ${style.active}`
+                : style.button
+            }
+            activeClassName={style.active}
+          >
+            <ProfileIcon type='secondary' />
+            <span className='pl-2'>Личный кабинет</span>
+          </NavLink>
+        </div>
       </div>
-      <div className={style.wrapperLogo}>
-        <Logo />
-      </div>
-      <div className={style.wrapperLk}>
-        <a href='/' className={style.button}>
-          <ProfileIcon type='secondary' />
-          <span className='pl-2 text text_type_main-default text_color_inactive'>
-            Личный кабинет
-          </span>
-        </a>
-      </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 export default AppHeader;

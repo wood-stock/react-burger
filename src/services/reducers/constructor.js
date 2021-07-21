@@ -3,6 +3,7 @@ import {
   ADD_CONSTRUCTOR_INGREDIENT,
   DEL_CONSTRUCTOR_INGREDIENT,
 } from '../actions/constructor';
+import { ADD_ORDER_SUCCESS } from '../actions/order';
 const initialState = {
   constructorIngredients: [],
   constructorBun: {},
@@ -60,6 +61,13 @@ export const constructorReducer = (state = initialState, action) => {
             (item, index) => action.index !== index
           ),
         ],
+      };
+    }
+    case ADD_ORDER_SUCCESS: {
+      return {
+        ...state,
+        constructorIngredients: null,
+        constructorBun: null,
       };
     }
     default: {

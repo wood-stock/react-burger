@@ -5,12 +5,15 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './modal.module.css';
 import { CLOSE_MODAL } from '../../services/actions/modal';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 const Modal = ({ children, headerText }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const closeModal = () => {
     dispatch({
       type: CLOSE_MODAL,
     });
+    history.push('/');
   };
   const closeModalsByEscape = (e) => {
     if (e.key === 'Escape') {

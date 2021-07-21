@@ -5,21 +5,15 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { GET_SELECTED_INGREDIENT } from '../../services/actions/selectedIngredient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
+import { Link, useLocation } from 'react-router-dom';
 
 const BurgerIngredient = ({ ingredient }) => {
-  const dispatch = useDispatch();
+  const location = useLocation();
   const { constructorIngredients, constructorBun } = useSelector(
     (state) => state.constructor
   );
-  const showIngredientDetails = (item) => {
-    dispatch({
-      type: GET_SELECTED_INGREDIENT,
-      item,
-    });
-  };
   const [, dragRef] = useDrag({
     type: 'Ingredient',
     item: { ingredient },
@@ -40,10 +34,13 @@ const BurgerIngredient = ({ ingredient }) => {
     }
   }, [constructorIngredients, constructorBun, ingredient.name]);
   return (
-    <li
+    <Link
+      to={{
+        pathname: `/ingredients/${ingredient._id}`,
+        state: { background: location },
+      }}
       className={style.cardIngredient}
       name={ingredient.name}
-      onClick={() => showIngredientDetails(ingredient)}
       ref={dragRef}
     >
       {count ? <Counter count={count} size='default' /> : null}
@@ -55,7 +52,7 @@ const BurgerIngredient = ({ ingredient }) => {
         <CurrencyIcon type='primary' />
       </div>
       <p className='text text_type_main-default pb-4'>{ingredient.name}</p>
-    </li>
+    </Link>
   );
 };
 BurgerIngredient.propTypes = {
