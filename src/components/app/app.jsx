@@ -64,7 +64,7 @@ const App = () => {
             <Route path='/feed' exact>
               <Feed />
             </Route>
-            <Route path='/feed/single' exact>
+            <Route path='/feed/:id' exact>
               <SingleOrder />
             </Route>
             <ProtectedRouteAuth path='/profile' exact>
@@ -73,7 +73,7 @@ const App = () => {
             <ProtectedRouteAuth path='/profile/orders' exact>
               <History />
             </ProtectedRouteAuth>
-            <ProtectedRouteAuth path='/profile/orders/single' exact>
+            <ProtectedRouteAuth path='/profile/orders/:id' exact>
               <SingleOrder />
             </ProtectedRouteAuth>
             <Route path='/ingredients/:id' exact>
@@ -89,14 +89,32 @@ const App = () => {
             </Route>
           </Switch>
           {background && (
-            <Route
-              path='/ingredients/:id'
-              children={
-                <Modal headerText='Детали ингредиента'>
-                  <IngredientDetails />
-                </Modal>
-              }
-            ></Route>
+            <>
+              <Route
+                path='/ingredients/:id'
+                children={
+                  <Modal headerText='Детали ингредиента' back={'/'}>
+                    <IngredientDetails />
+                  </Modal>
+                }
+              ></Route>
+              <Route
+                path='/feed/:id'
+                children={
+                  <Modal back={'/feed'}>
+                    <SingleOrder />
+                  </Modal>
+                }
+              ></Route>
+              <Route
+                path='/profile/orders/:id'
+                children={
+                  <Modal back={'/profile/orders'}>
+                    <SingleOrder />
+                  </Modal>
+                }
+              ></Route>
+            </>
           )}
         </main>
       </>

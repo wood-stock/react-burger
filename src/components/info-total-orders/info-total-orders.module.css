@@ -2,8 +2,7 @@
   width: 580px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 68px;
+  justify-content: space-between;
 }
 .stage {
   display: flex;
@@ -15,6 +14,10 @@
 }
 .ready {
   color: var(--colors-interface-success);
+  max-height: 264px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 .total {
   text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),

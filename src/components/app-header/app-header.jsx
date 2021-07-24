@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, Link } from 'react-router-dom';
 import style from './app-header.module.css';
 import {
   Logo,
@@ -43,7 +43,9 @@ const AppHeader = () => {
           </nav>
         </div>
         <div className={style.wrapperLogo}>
-          <Logo />
+          <Link to='/'>
+            <Logo />
+          </Link>
         </div>
         <div
           className={`${style.wrapperLk} text text_type_main-default text_color_inactive`}

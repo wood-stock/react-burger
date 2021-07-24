@@ -39,3 +39,60 @@ export const setCookie = (name, value, props) => {
 export const deleteCookie = (name) => {
   setCookie(name, null, { expires: -1 });
 };
+
+export const transformDate = (date) => {
+  const getDiffDays = (days) =>
+    days === 0
+      ? 'Сегодня'
+      : days === 1
+      ? 'Вчера'
+      : days > 1
+      ? `${days} дня назад`
+      : '';
+  const dataCreate = new Date(date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diffTime = Math.ceil((today - dataCreate) / (60 * 60 * 24 * 1000));
+  const hours =
+    dataCreate.getHours() > 9
+      ? dataCreate.getHours()
+      : `0${dataCreate.getHours()}`;
+  const min =
+    dataCreate.getMinutes() > 9
+      ? dataCreate.getMinutes()
+      : `0${dataCreate.getMinutes()}`;
+  return `${getDiffDays(diffTime)},${hours}:${min}i-GMT+${
+    (dataCreate.getTimezoneOffset() * -1) / 60
+  }`;
+};
+
+export const showStatus = (status) =>
+  status === null ? null : status === 'done' ? (
+    'Выполнен'
+  ) : status === 'pending' ? (
+    <span style={{ color: 'white' }}>Отменен</span>
+  ) : (
+    <span style={{ color: 'white' }}>Готовится</span>
+  );
+// const resultReduce = arr.reduce(
+//   function (acc, cur) {
+//     if (!acc.hash[cur]) {
+//       acc.hash[cur] = { [cur]: 1 };
+//       acc.map.set(acc.hash[cur], 1);
+//       acc.result.push(acc.hash[cur]);
+//     } else {
+//       acc.hash[cur][cur] += 1;
+//       acc.map.set(acc.hash[cur], acc.hash[cur][cur]);
+//     }
+//     return acc;
+//   },
+//   {
+//     hash: {},
+//     map: new Map(),
+//     result: [],
+//   }
+// );
+
+// const result = resultReduce.result.sort(function (a, b) {
+//   return resultReduce.map.get(b) - resultReduce.map.get(a);
+// });

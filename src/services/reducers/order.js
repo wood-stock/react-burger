@@ -18,6 +18,7 @@ export const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         orderRequest: true,
+        orderSuccess: false,
         orderFailed: false,
       };
     }
@@ -25,7 +26,9 @@ export const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         order: action.order,
+        orderRequest: false,
         orderSuccess: true,
+        orderFailed: false,
       };
     }
     case ADD_ORDER_ERROR: {
@@ -33,6 +36,7 @@ export const orderReducer = (state = initialState, action) => {
         ...state,
         orderFailed: true,
         orderRequest: false,
+        orderSuccess: false,
       };
     }
     case CLOSE_MODAL: {

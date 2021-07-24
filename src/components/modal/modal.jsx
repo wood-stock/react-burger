@@ -6,14 +6,14 @@ import style from './modal.module.css';
 import { CLOSE_MODAL } from '../../services/actions/modal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-const Modal = ({ children, headerText }) => {
+const Modal = ({ children, headerText, back }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const closeModal = () => {
     dispatch({
       type: CLOSE_MODAL,
     });
-    history.push('/');
+    history.push(back);
   };
   const closeModalsByEscape = (e) => {
     if (e.key === 'Escape') {
@@ -28,6 +28,7 @@ const Modal = ({ children, headerText }) => {
   });
   return ReactDOM.createPortal(
     <>
+      {console.log(back)}
       <div className={style.modal}>
         <header className={style.header}>
           <p className='text text_type_main-large'>{headerText}</p>
