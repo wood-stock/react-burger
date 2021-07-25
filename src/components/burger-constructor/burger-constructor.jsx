@@ -19,6 +19,7 @@ const BurgerConstructor = () => {
   const { constructorIngredients, constructorBun } = useSelector(
     (state) => state.constructor
   );
+  const { orderRequest } = useSelector((state) => state.order);
   const [, dropTarget] = useDrop({
     accept: 'Ingredient',
     drop(ingredient) {
@@ -104,17 +105,23 @@ const BurgerConstructor = () => {
             </div>
             {constructorBun && constructorIngredients ? (
               <>
-                <Button
-                  type='primary'
-                  size='large'
-                  onClick={
-                    hasToken
-                      ? () => dispatch(handleAddOrder(idForOrder()))
-                      : () => history.replace('/login')
-                  }
-                >
-                  Оформить заказ
-                </Button>
+                {orderRequest ? (
+                  <p className='text text_type_main-medium text_color_inactive'>
+                    Подождите отправлям на кухню
+                  </p>
+                ) : (
+                  <Button
+                    type='primary'
+                    size='large'
+                    onClick={
+                      hasToken
+                        ? () => dispatch(handleAddOrder(idForOrder()))
+                        : () => history.replace('/login')
+                    }
+                  >
+                    Оформить заказ
+                  </Button>
+                )}
               </>
             ) : constructorIngredients ? (
               <p className='text text_type_main-medium text_color_inactive'>

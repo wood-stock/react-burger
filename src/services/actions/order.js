@@ -1,4 +1,5 @@
 import { oredersApi } from '../../constants';
+import { getCookie } from '../utils';
 export const ADD_ORDER_REQUEST = 'ADD_ORDER_REQUEST';
 export const ADD_ORDER_SUCCESS = 'ADD_ORDER_SUCCESS';
 export const ADD_ORDER_ERROR = 'CLEAR_SELECTED__ERROR';
@@ -10,7 +11,8 @@ export const handleAddOrder = (listId) => (dispatch) => {
   return fetch(oredersApi, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + getCookie('token'),
     },
     body: JSON.stringify({
       ingredients: listId,
