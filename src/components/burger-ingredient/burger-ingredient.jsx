@@ -42,6 +42,7 @@ const BurgerIngredient = ({ ingredient }) => {
       className={style.cardIngredient}
       name={ingredient.name}
       ref={dragRef}
+      data-test='ingredient'
     >
       {count ? <Counter count={count} size='default' /> : null}
       <img src={ingredient.image} alt={ingredient.name} />
