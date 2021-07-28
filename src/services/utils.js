@@ -74,25 +74,3 @@ export const showStatus = (status) =>
   ) : (
     <span style={{ color: 'white' }}>Готовится</span>
   );
-// const resultReduce = arr.reduce(
-//   function (acc, cur) {
-//     if (!acc.hash[cur]) {
-//       acc.hash[cur] = { [cur]: 1 };
-//       acc.map.set(acc.hash[cur], 1);
-//       acc.result.push(acc.hash[cur]);
-//     } else {
-//       acc.hash[cur][cur] += 1;
-//       acc.map.set(acc.hash[cur], acc.hash[cur][cur]);
-//     }
-//     return acc;
-//   },
-//   {
-//     hash: {},
-//     map: new Map(),
-//     result: [],
-//   }
-// );
-
-// const result = resultReduce.result.sort(function (a, b) {
-//   return resultReduce.map.get(b) - resultReduce.map.get(a);
-// });
