@@ -54,11 +54,15 @@ const BurgerConstructor = () => {
   );
 
   return (
-    <section className={style.burgerConstructor + ' pl-4'} ref={dropTarget}>
+    <section
+      className={style.burgerConstructor + ' pl-4'}
+      ref={dropTarget}
+      data-test='dropTarget'
+    >
       {constructorIngredients || constructorBun ? (
         <>
           {constructorBun && (
-            <div className={style.bun}>
+            <div className={style.bun} data-test='container-bun-up'>
               <ConstructorElement
                 type='top'
                 isLocked={true}
@@ -69,7 +73,7 @@ const BurgerConstructor = () => {
             </div>
           )}
           {constructorIngredients ? (
-            <ul className={style.dopElement}>
+            <ul className={style.dopElement} data-test='container'>
               {constructorIngredients.map((item, index) => (
                 <AddIngredient
                   name={item.name}
@@ -87,7 +91,7 @@ const BurgerConstructor = () => {
             </p>
           )}
           {constructorBun && (
-            <div className={style.bun}>
+            <div className={style.bun} data-test='container-bun-down'>
               <ConstructorElement
                 type='bottom'
                 isLocked={true}
