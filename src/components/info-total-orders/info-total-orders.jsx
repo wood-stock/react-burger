@@ -34,7 +34,7 @@ export const InfoTotalOrders = () => {
         </div>
       </div>
       <div className='text text_type_main-medium'>
-        Выполнено за всё сегодня:
+        Выполнено за сегодня:
         <div className={`${style.total} text text_type_digits-large`}>
           {totalToday}
         </div>

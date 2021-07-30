@@ -3,22 +3,39 @@ import style from './single-order.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ItemInOrder from '../../components/item-in-order/item-in-order';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import { transformDate, showStatus } from '../../services/utils';
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSED,
 } from '../../services/actions/ws';
+import {
+  WS_CONNECTION_PRIVATE_START,
+  WS_CONNECTION_PRIVATE_CLOSED,
+} from '../../services/actions/ws-private';
 import Loader from '../../components/loader/loader';
 const SingleOrder = () => {
+  const isProfile = !!useRouteMatch('/profile');
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START });
-    return () => dispatch({ type: WS_CONNECTION_CLOSED });
-  }, [dispatch]);
   const { id } = useParams();
+  useEffect(() => {
+    dispatch(
+      isProfile
+        ? { type: WS_CONNECTION_PRIVATE_START }
+        : { type: WS_CONNECTION_START }
+    );
+    return () =>
+      dispatch(
+        isProfile
+          ? { type: WS_CONNECTION_PRIVATE_CLOSED }
+          : { type: WS_CONNECTION_CLOSED }
+      );
+  }, [dispatch, isProfile]);
+
   const { catalog, orders } = useSelector((state) => ({
-    orders: state.ws.messages.orders,
+    orders: isProfile
+      ? state.wsPrivate.messages.orders
+      : state.ws.messages.orders,
     catalog: state.ingredients.ingredients,
   }));
   const selectedOrder = orders && orders.find((item) => item._id === id);
