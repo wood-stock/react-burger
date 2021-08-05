@@ -1,7 +1,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { setCookie, deleteCookie, getCookie } from '../utils';
 import { checkResponse, url } from '../api';
-import { AppDispatch } from '../types';
+import { AppThunk } from '../types';
 import {//регистрация
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -68,7 +68,7 @@ import {//регистрация
 
   export type TAuthAction = IRegisterReqestAction | IRegisterSuccessAction | IRegisterErrorAction | ILoginReqestAction | ILoginSuccessAction | ILoginErrorAction | ILogoutReqestAction | ILogoutSuccessAction | ILogoutErrorAction | IRefreshReqestAction | IRefreshSuccessAction | IRefreshErrorAction | IForgotReqestAction | IForgotSuccessAction | IForgotErrorAction | IUserReqestAction | IUserSuccessAction | IUserErrorAction | IEditReqestAction | IEditSuccessAction | IEditErrorAction | IResetReqestAction | IResetSuccessAction | IResetErrorAction;
 
-export const registration = (email: string, password: string, name: string) => (dispatch: AppDispatch) => {
+export const registration:AppThunk = (email: string, password: string, name: string) => (dispatch) => {
   dispatch({
     type: REGISTER_REQUEST,
   });
@@ -100,7 +100,7 @@ export const registration = (email: string, password: string, name: string) => (
     });
 };
 
-export const login = (email: string, password: string) => (dispatch: AppDispatch) => {
+export const login:AppThunk = (email: string, password: string) => (dispatch) => {
   dispatch({
     type: LOGIN_REQUEST,
   });
@@ -131,7 +131,7 @@ export const login = (email: string, password: string) => (dispatch: AppDispatch
       });
     });
 };
-export const logout = (history: RouteComponentProps["history"]) => (dispatch: AppDispatch) => {
+export const logout:AppThunk = (history: RouteComponentProps["history"]) => (dispatch) => {
   dispatch({
     type: LOGOUT_REQUEST,
   });
@@ -160,7 +160,7 @@ export const logout = (history: RouteComponentProps["history"]) => (dispatch: Ap
       });
     });
 };
-export const refresh = () => (dispatch: AppDispatch) => {
+export const refresh:AppThunk = () => (dispatch) => {
   dispatch({
     type: REFRESH_REQUEST,
   });
@@ -190,7 +190,7 @@ export const refresh = () => (dispatch: AppDispatch) => {
       });
     });
 };
-export const forgot = (email: string, history: RouteComponentProps["history"]) => (dispatch: AppDispatch) => {
+export const forgot:AppThunk = (email: string, history: RouteComponentProps["history"]) => (dispatch) => {
   dispatch({
     type: FORGOT_REQUEST,
   });
@@ -217,7 +217,7 @@ export const forgot = (email: string, history: RouteComponentProps["history"]) =
       });
     });
 };
-export const reset = (password: string, token: string, history: RouteComponentProps["history"]) => (dispatch: AppDispatch) => {
+export const reset:AppThunk = (password: string, token: string, history: RouteComponentProps["history"]) => (dispatch) => {
   dispatch({
     type: RESET_REQUEST,
   });
@@ -244,7 +244,7 @@ export const reset = (password: string, token: string, history: RouteComponentPr
       });
     });
 };
-export const user = () => (dispatch: AppDispatch) => {
+export const user:AppThunk = () => (dispatch) => {
   dispatch({
     type: USER_REQUEST,
   });
@@ -274,7 +274,7 @@ export const user = () => (dispatch: AppDispatch) => {
     });
 };
 
-export const edit = (email: string, password: string, name: string) => (dispatch: AppDispatch) => {
+export const edit:AppThunk = (email: string, password: string, name: string) => (dispatch) => {
   dispatch({
     type: EDIT_REQUEST,
   });

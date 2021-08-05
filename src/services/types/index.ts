@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
-import { store } from '../../store';
+import { store } from '../store';
 import { TAuthAction } from '../actions/auth';
 import { TConstructorAction } from '../actions/constructor';
 import { TGetIngredientsAction } from '../actions/ingredients';
@@ -18,7 +18,6 @@ createdAt: string;
 updatedAt: string;
 }
 export type TMessages = {
-success: boolean;
 orders: Array<TOrder>;
 total: number;
 totalToday: number;
@@ -37,15 +36,9 @@ image_mobile: string;
 image_large: string;
 __v: number;
 }
-export type TWsActions = {
-    wsInit: string,
-    onOpen: string,
-    onError: string,
-    onClose: string,
-    onMessage: string,
-    wsSendMessage: string,}
+
 export type TLocation = {
-      background?: any;
+      background?: string;
     }
 
 

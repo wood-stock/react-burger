@@ -10,7 +10,7 @@ interface IAddConstructorIngredientAction {readonly type: typeof ADD_CONSTRUCTOR
 interface IDelConstructorIngredientAction {readonly type: typeof DEL_CONSTRUCTOR_INGREDIENT; readonly index: number;}
 interface IAddOrderSuccessAction {readonly type: typeof ADD_ORDER_SUCCESS;}
 export type TConstructorAction = IMoveConstructorItemAction | IAddConstructorIngredientAction | IDelConstructorIngredientAction | IAddOrderSuccessAction
-export const moveConstructorItem = ({ dragIndex, hoverIndex }: {dragIndex: number, hoverIndex: number}) => ({
+export const moveConstructorItem = ({ dragIndex, hoverIndex }:{dragIndex: number, hoverIndex: number}) => ({
   type: MOVE_CONSTRUCTOR_ITEM,
   dragIndex,
   hoverIndex,

@@ -27,7 +27,7 @@ const BurgerConstructor = () => {
   const { orderRequest } = useSelector((state) => state.order);
   const [, dropTarget] = useDrop({
     accept: 'Ingredient',
-    drop(ingredient: any) {
+    drop(ingredient: Array<TIngredient>) {
       dispatch({
         type: ADD_CONSTRUCTOR_INGREDIENT,
         ...ingredient,
@@ -46,13 +46,13 @@ const BurgerConstructor = () => {
   ) => {
     if (constructorIngredients && constructorBun) {
       return constructorIngredients.reduce(
-        (result: any, item: { price: number }) => result + item.price,
+        (result: number, item: { price: number }) => result + item.price,
         constructorBun?.price * 2
       );
     } else if (constructorBun) return constructorBun?.price * 2;
     else
       return constructorIngredients?.reduce(
-        (result: any, item: { price: number }) => result + item.price,
+        (result: number, item: { price: number }) => result + item.price,
         0
       );
   };

@@ -1,4 +1,5 @@
 import {TWsPrivateAction} from '../actions/ws-private';
+import { TMessages } from '../types';
 import {
   WS_CONNECTION_PRIVATE_SUCCESS,
   WS_CONNECTION_PRIVATE_ERROR,
@@ -8,15 +9,25 @@ import {
 type TWSPrivateState = {
   wsConnected: boolean,
   error: null | boolean,
-  messages: any,
+  messages: TMessages ,
 }
-const initialState:TWSPrivateState = { wsConnected: false, error: null, messages: [] };
-export const wsReducerPrivate = (state = initialState, action: TWsPrivateAction):TWSPrivateState => {
+const initialState: TWSPrivateState = {
+  wsConnected: false,
+  error: false,
+  messages: {
+    orders:[],
+    total:0,
+    totalToday:0,
+  }, };
+export const wsReducerPrivate = (state = initialState, action: TWsPrivateAction) => {
   switch (action.type) {
     case WS_CONNECTION_PRIVATE_SUCCESS:
       return { ...state, wsConnected: true };
     case WS_CONNECTION_PRIVATE_ERROR:
-      return { ...state, error: action.payload, wsConnected: false };
+      return {
+        ...state,
+        error: action.payload,
+        wsConnected: false };
     case WS_CONNECTION_PRIVATE_CLOSED:
       return { ...state, wsConnected: false };
     case WS_GET_MESSAGE_PRIVATE:

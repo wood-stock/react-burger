@@ -8,8 +8,8 @@ import { wsReducerPrivate } from './ws-private';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
-  constructor: constructorReducer,
   order: orderReducer,
+  constructor: constructorReducer,
   auth: authReducer,
   ws: wsReducer,
   wsPrivate: wsReducerPrivate,

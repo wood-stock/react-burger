@@ -5,17 +5,22 @@ import {
   WS_GET_MESSAGE,
 } from '../constants/ws';
 import {TWsAction} from '../actions/ws';
+import { TMessages } from '../types';
 type TWSState = {
   wsConnected: boolean,
   error: null | boolean,
-  messages: any,
+  messages: TMessages ,
 }
 const initialState: TWSState = {
   wsConnected: false,
-  error: null,
-  messages: [],
+  error: false,
+  messages: {
+    orders:[],
+    total: 0,
+    totalToday:0,
+  },
 };
-export const wsReducer = (state = initialState, action: TWsAction): TWSState => {
+export const wsReducer = (state = initialState, action: TWsAction) => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {

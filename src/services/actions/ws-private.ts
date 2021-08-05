@@ -8,22 +8,24 @@ import {
 } from '../constants/ws-private';
 
 export const wsPrivateActions = {
-  wsInit: WS_CONNECTION_PRIVATE_START,
-  onOpen: WS_CONNECTION_PRIVATE_SUCCESS,
-  onError: WS_CONNECTION_PRIVATE_ERROR,
-  onClose: WS_CONNECTION_PRIVATE_CLOSED,
-  onMessage: WS_GET_MESSAGE_PRIVATE,
-  wsSendMessage: WS_SEND_MESSAGE_PRIVATE,
+  wsInit: WS_CONNECTION_PRIVATE_START as typeof WS_CONNECTION_PRIVATE_START,
+  onOpen: WS_CONNECTION_PRIVATE_SUCCESS as typeof WS_CONNECTION_PRIVATE_SUCCESS,
+  onError: WS_CONNECTION_PRIVATE_ERROR as typeof WS_CONNECTION_PRIVATE_ERROR,
+  onClose: WS_CONNECTION_PRIVATE_CLOSED as typeof WS_CONNECTION_PRIVATE_CLOSED,
+  onMessage: WS_GET_MESSAGE_PRIVATE as typeof WS_GET_MESSAGE_PRIVATE,
+  wsSendMessage: WS_SEND_MESSAGE_PRIVATE as typeof WS_SEND_MESSAGE_PRIVATE,
 };
+
+export type TWsPrivateActions = typeof wsPrivateActions;
 
 interface IWsConnectionPrivateStart {
 	readonly type: typeof WS_CONNECTION_PRIVATE_START;
 }
 interface IWsConnectionPrivateSuccess {
-	readonly type: typeof WS_CONNECTION_PRIVATE_SUCCESS, payload: any;
+	readonly type: typeof WS_CONNECTION_PRIVATE_SUCCESS, payload: boolean;
 }
 interface IWsConnectionPrivateError {
-	readonly type: typeof WS_CONNECTION_PRIVATE_ERROR; payload: any;
+	readonly type: typeof WS_CONNECTION_PRIVATE_ERROR; payload: boolean;
 }
 interface IWsConnectionPrivateClosed {
 	readonly type: typeof WS_CONNECTION_PRIVATE_CLOSED;

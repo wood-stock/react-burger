@@ -1,19 +1,23 @@
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/hooks';
-import { useEffect, FC } from 'react';
+import { useEffect, FC, ReactNode } from 'react';
 import { refresh } from '../../services/actions/auth';
-interface iProtectedRouteAuth{
+interface iProtectedRouteAuth {
   path: string;
   exact?: boolean;
+  children: React.ReactNode;
 }
-export const ProtectedRouteAuth:FC<iProtectedRouteAuth> = ({ children, ...rest }) => {
+export const ProtectedRouteAuth: FC<iProtectedRouteAuth> = ({
+  children,
+  ...rest
+}) => {
   const dispatch = useDispatch();
   const hasToken = localStorage.getItem('refreshToken');
   const { name } = useSelector((store) => store.auth);
   useEffect(() => {
     dispatch(refresh());
   }, [dispatch]);
-  const render = ({ location }:{location:any}) => {
+  const render = ({ location }: { location: ReactNode }) => {
     if (name || hasToken) {
       return children;
     }
@@ -24,7 +28,10 @@ export const ProtectedRouteAuth:FC<iProtectedRouteAuth> = ({ children, ...rest }
   return <Route {...rest} render={render} />;
 };
 
-const getNextPage = (location:any, history: any) => {
+const getNextPage = (
+  location: { state: { target?: string } },
+  history: ReactNode
+) => {
   let result;
 
   if (location && location.state?.target) {
@@ -37,9 +44,18 @@ const getNextPage = (location:any, history: any) => {
   return result;
 };
 
-export const ProtectedRouteUnAuth:FC<iProtectedRouteAuth> = ({ children, ...rest }) => {
+export const ProtectedRouteUnAuth: FC<iProtectedRouteAuth> = ({
+  children,
+  ...rest
+}) => {
   const { name } = useSelector((store) => store.auth);
-  const render = ({ location, history }:{location:any, history: any}) => {
+  const render = ({
+    location,
+    history,
+  }: {
+    location: { state: { target?: string } };
+    history: ReactNode;
+  }) => {
     if (!name) {
       return children;
     }

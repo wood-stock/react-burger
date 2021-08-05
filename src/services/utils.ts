@@ -10,7 +10,7 @@ export const getCookie = (name: string): string | undefined => {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 };
 
-export const setCookie = (name: string, value: string, props: { [key: string]: any } & { expires?: number | Date | string } = {}) => {
+export const setCookie = (name: string, value: string, props: { [key: string]: {} } & { expires?: number | Date | string } = {}) => {
   props = {
     path: '/',
     ...props,

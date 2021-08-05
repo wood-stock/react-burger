@@ -1,6 +1,6 @@
 import { url, checkResponse } from '../api';
 import { getCookie } from '../utils';
-import { AppDispatch } from '../types';
+import { AppThunk } from '../types';
 import {
   ADD_ORDER_REQUEST,
   ADD_ORDER_SUCCESS,
@@ -13,7 +13,7 @@ interface IAddOrderSuccessAction {readonly type: typeof ADD_ORDER_SUCCESS; reado
 interface IAddOrderErrorAction {readonly type: typeof ADD_ORDER_ERROR}
 
 export type TAddOrderAction = IAddOrderRequestAction | IAddOrderSuccessAction | IAddOrderErrorAction;
-export const handleAddOrder = (listId: string[]) => (dispatch: AppDispatch) => {
+export const handleAddOrder:AppThunk = (listId: string[]) => (dispatch) => {
   dispatch({
     type: ADD_ORDER_REQUEST,
   });

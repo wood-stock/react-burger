@@ -1,8 +1,9 @@
 import { MiddlewareAPI, AnyAction } from 'redux';
-import { TWsActions } from '../types';
+import { TWsActions } from '../actions/ws';
+import {TWsPrivateActions} from '../actions/ws-private';
 import { getCookie } from '../utils';
 
-export const socketMiddleware = (wsUrl: string, wsActions: TWsActions, auth: boolean) => {
+export const socketMiddleware = (wsUrl: string, wsActions: TWsActions | TWsPrivateActions, auth: boolean) => {
   return (store:MiddlewareAPI) => {
     let socket: WebSocket | null = null;
     return (next: (i: AnyAction)=> void) => (action: AnyAction) => {

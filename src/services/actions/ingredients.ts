@@ -1,5 +1,5 @@
 import { url, checkResponse } from '../api';
-import { AppDispatch, TIngredient } from '../types';
+import { AppThunk, TIngredient } from '../types';
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -15,7 +15,7 @@ interface IGetIngredientsSuccessAction {readonly type: typeof GET_INGREDIENTS_SU
 interface IGetIngredientsErrorAction {readonly type: typeof GET_INGREDIENTS_ERROR}
 export type TGetIngredientsAction = IGetIngredientsRequestAction | IGetIngredientsSuccessAction | IGetIngredientsErrorAction;
 
-export const getIngredients = () => (dispatch: AppDispatch) => {
+export const getIngredients:AppThunk = () => (dispatch) => {
   dispatch({
     type: GET_INGREDIENTS_REQUEST,
   });
