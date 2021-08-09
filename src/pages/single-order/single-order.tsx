@@ -14,7 +14,6 @@ import {
   WS_CONNECTION_PRIVATE_CLOSED,
 } from '../../services/constants/ws-private';
 import Loader from '../../components/loader/loader';
-import { TIngredient, TOrder } from '../../services/types';
 const SingleOrder = () => {
   const isProfile = !!useRouteMatch('/profile');
   const dispatch = useDispatch();
@@ -40,22 +39,21 @@ const SingleOrder = () => {
       : state.ws.messages.orders,
     catalog: state.ingredients.ingredients,
   }));
-  const selectedOrder =
-    orders && orders.find((item: TOrder) => item._id === id);
-  const listId = orders && selectedOrder.ingredients;
+  const selectedOrder = orders && orders.find((item) => item._id === id);
+  const listId = orders && selectedOrder?.ingredients;
   const orderIngredients =
     orders &&
-    listId.map((id: string) => {
+    listId?.map((id: string) => {
       return catalog.find((item) => item._id === id);
     });
   const price =
     orders &&
-    orderIngredients.reduce((sum: any, item: { price: any }) => {
-      return sum + item.price;
+    orderIngredients?.reduce((sum, item) => {
+      return sum + (item?.price || 0);
     }, 0);
-  const status = orders && showStatus(selectedOrder.status);
+  const status = selectedOrder && showStatus(selectedOrder.status);
 
-  return orders ? (
+  return selectedOrder ? (
     <div className={style.container}>
       <div className={`${style.id} text text_type_digits-default`}>
         #{selectedOrder.number}
@@ -68,9 +66,10 @@ const SingleOrder = () => {
       </div>
       <div className='text text_type_main-medium pt-15'>Cотав:</div>
       <ul className={`${style.wrapper} pt-6`}>
-        {orderIngredients.map((item: TIngredient, i: number) => (
-          <ItemInOrder key={i} {...item} />
-        ))}
+        {orderIngredients &&
+          orderIngredients.map((item, i) =>
+            item ? <ItemInOrder key={i} {...item} /> : null
+          )}
       </ul>
       <div className={`${style.footer} pt-10`}>
         <span className='text text_type_main-default text_color_inactive'>

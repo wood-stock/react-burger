@@ -6,6 +6,7 @@ import {
   WS_GET_MESSAGE_PRIVATE,
   WS_SEND_MESSAGE_PRIVATE,
 } from '../constants/ws-private';
+import { TMessages } from '../types';
 
 export const wsPrivateActions = {
   wsInit: WS_CONNECTION_PRIVATE_START as typeof WS_CONNECTION_PRIVATE_START,
@@ -31,7 +32,7 @@ interface IWsConnectionPrivateClosed {
 	readonly type: typeof WS_CONNECTION_PRIVATE_CLOSED;
 }
 interface IWsGetMessagePrivate {
-	readonly type: typeof WS_GET_MESSAGE_PRIVATE; readonly payload: any;
+	readonly type: typeof WS_GET_MESSAGE_PRIVATE; readonly payload: TMessages;
 }
 interface IWsSendMessagePrivate {
 	readonly type: typeof WS_SEND_MESSAGE_PRIVATE;
