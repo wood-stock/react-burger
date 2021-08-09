@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.149d2a6d.chunk.css",
-    "main.js": "/static/js/main.520a217e.chunk.js",
-    "main.js.map": "/static/js/main.520a217e.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.83128fad.js",
-    "runtime-main.js.map": "/static/js/runtime-main.83128fad.js.map",
-    "static/css/2.241c3154.chunk.css": "/static/css/2.241c3154.chunk.css",
-    "static/js/2.a703a128.chunk.js": "/static/js/2.a703a128.chunk.js",
-    "static/js/2.a703a128.chunk.js.map": "/static/js/2.a703a128.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.241c3154.chunk.css.map": "/static/css/2.241c3154.chunk.css.map",
-    "static/css/main.149d2a6d.chunk.css.map": "/static/css/main.149d2a6d.chunk.css.map",
-    "static/js/2.a703a128.chunk.js.LICENSE.txt": "/static/js/2.a703a128.chunk.js.LICENSE.txt",
-    "static/media/fonts.css": "/static/media/iceland.77ad7fc2.woff",
-    "static/media/order-details.module.css": "/static/media/sphere.d82a45bb.svg"
+    "main.css": "/react-burger/static/css/main.fbd2f47d.chunk.css",
+    "main.js": "/react-burger/static/js/main.520a217e.chunk.js",
+    "main.js.map": "/react-burger/static/js/main.520a217e.chunk.js.map",
+    "runtime-main.js": "/react-burger/static/js/runtime-main.b6f8bb45.js",
+    "runtime-main.js.map": "/react-burger/static/js/runtime-main.b6f8bb45.js.map",
+    "static/css/2.598d7f61.chunk.css": "/react-burger/static/css/2.598d7f61.chunk.css",
+    "static/js/2.a703a128.chunk.js": "/react-burger/static/js/2.a703a128.chunk.js",
+    "static/js/2.a703a128.chunk.js.map": "/react-burger/static/js/2.a703a128.chunk.js.map",
+    "index.html": "/react-burger/index.html",
+    "static/css/2.598d7f61.chunk.css.map": "/react-burger/static/css/2.598d7f61.chunk.css.map",
+    "static/css/main.fbd2f47d.chunk.css.map": "/react-burger/static/css/main.fbd2f47d.chunk.css.map",
+    "static/js/2.a703a128.chunk.js.LICENSE.txt": "/react-burger/static/js/2.a703a128.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/react-burger/static/media/iceland.77ad7fc2.woff",
+    "static/media/order-details.module.css": "/react-burger/static/media/sphere.d82a45bb.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.83128fad.js",
-    "static/css/2.241c3154.chunk.css",
+    "static/js/runtime-main.b6f8bb45.js",
+    "static/css/2.598d7f61.chunk.css",
     "static/js/2.a703a128.chunk.js",
-    "static/css/main.149d2a6d.chunk.css",
+    "static/css/main.fbd2f47d.chunk.css",
     "static/js/main.520a217e.chunk.js"
   ]
 }
