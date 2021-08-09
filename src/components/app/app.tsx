@@ -122,7 +122,7 @@ const App = () => {
   };
   if (!ingredientsSuccess) return <Loader />;
   return (
-    <Router>
+    <Router basename='/'>
       <ModalSwitch />
     </Router>
   );
