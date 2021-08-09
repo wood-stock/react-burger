@@ -122,7 +122,7 @@ const App = () => {
   };
   if (!ingredientsSuccess) return <Loader />;
   return (
-    <Router basename='/'>
+    <Router basename='react-burger'>
       <ModalSwitch />
     </Router>
   );
