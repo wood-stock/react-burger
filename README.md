@@ -1,46 +1,24 @@
-# Getting Started with Create React App
+# SPA food конструктор
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+*Учебный проект Яндекс.Практикум - Конструктор бургеров*
 
-## Available Scripts
+Проект реализован на основе [Create React App](https://github.com/facebook/create-react-app)
 
-In the project directory, you can run:
+<img src='https://s401man.storage.yandex.net/rdisk/5d0d186be2caad928636a9b52fa4a8d0c4f16aafc1911571643f1f8ba4bfd87d/6113d4b5/6MONtiVXzahXIB5LjOcXQUyOawk83FJUGMR5-kZHvgYuVI662w6Y9xIlk6gnjHh6X0PV2aIxFT15pABqouETQQ==?uid=4243631&filename=burgerPreview.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=4243631&fsize=24841&hid=cdcdfc671a5868f0354ca1b4ab8bc1f7&media_type=image&tknv=v2&etag=991fab73099373e6921e1e1866a200be&rtoken=uSnGmVV8fihd&force_default=yes&ycrid=na-98921c50062f74e11220b3291c81f7c8-downloader1f&ts=5c948d866d740&s=716c292f624a0644c65e69cffc06b611cb2ac2d5ef4d7db7eefb9bbef6cbcf41&pb=U2FsdGVkX1-ymik91AapZDDzaFdVFiRgM-TNzOTzGH4rPUDM95Gzh-fVoiw0tp-P4xKE0txq7RsXmCrhuJWiWTek0GCtCicF_w7Ma0DHAlI' width=30%/>
 
-### `yarn start`
+## [Live Demo](https://wood-stock.github.io/react-burger/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Технологии в проекте
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* HTML;
+* CSS;
+* JavaScript;
+* TypeScript;
+* React - *классовые и функциональные компоненты, hooks*;
+  * *react-dnd, react-router-dom.*
+* Redux;
+  * *redux-toolkit, redux-thunk.*
+* Rest API;
+* WebSocket;
+* Jest;
+* Cypress;
